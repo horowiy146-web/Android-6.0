@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Android 6.0 Marshmallow — Simulator</title>
+<!-- Запрещаем pinch-zoom, чтобы обои не "уезжали" и не масштабировались при зуме -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* доп. защита от случайного зума жестами / выделения */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: pan-x pan-y; /* разрешаем скролл, но не pinch-zoom */
+  }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000; /* на случай, пока картинка грузится */
+  }
+
+  /* Слой обоев: занимает весь экран, всегда покрывает его целиком (cover),
+     привязан к вьюпорту (fixed), поэтому не двигается и не меняет размер
+     при изменении масштаба/скролле. Автоматически подстраивается под
+     разрешение любого устройства. */
+  #wallpaper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('wallpaper.jpg');
+    background-size: cover;         /* заполняет экран без искажений */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;   /* не двигается при скролле контента поверх */
+    z-index: 0;
+  }
+
+  /* Контейнер для будущих элементов рабочего стола (иконки, статус-бар и т.д.) */
+  #desktop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+
+  <div id="wallpaper"></div>
+
+  <div id="desktop">
+    <!-- Сюда позже добавим: статус-бар, иконки приложений, док, свайп-жесты и т.д. -->
+  </div>
+
+</body>
+</html>
